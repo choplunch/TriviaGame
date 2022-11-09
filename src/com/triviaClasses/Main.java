@@ -1,7 +1,6 @@
 package com.triviaClasses;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+
+        /* link: https://youtu.be/kcve04b2QXM */
 
         /*
          * Exercise 3:
@@ -29,15 +30,15 @@ public class Main {
          *
          */
 
-        List<Element> elementObjectList = createElementList("src/data/ptable.csv");
+        List<Element> elementObjectList = createElementList();
 
         TriviaGame triviaGame = new TriviaGame("guessName", elementObjectList);
 
         triviaGame.startGame();
     }
 
-    private static List<Element> createElementList(String filePath) throws IOException {
-        List<List<String>> data = readDataFromCSV(filePath);
+    private static List<Element> createElementList() {
+        List<List<String>> data = readDataFromCSV("src/data/ptable.csv");
 
         List<Element> elementList = new ArrayList<>();
 
@@ -54,7 +55,7 @@ public class Main {
 
         try(BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             reader.readLine(); // Skip headers
-            String line = "";
+            String line;
 
             while ((line = reader.readLine()) != null) {
                 List<String> lineData = Arrays.asList(line.split("\\s*,\\s*"));
